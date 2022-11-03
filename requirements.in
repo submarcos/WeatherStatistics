@@ -1,6 +1,7 @@
 django
 requests
 psycopg2
+gunicorn
 celery[redis]
 django-celery-results
 django-celery-beat

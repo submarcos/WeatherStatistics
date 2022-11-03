@@ -45,6 +45,8 @@ django-celery-results==2.4.0
     # via -r requirements.in
 django-timezone-field==5.0
     # via django-celery-beat
+gunicorn==20.1.0
+    # via -r requirements.in
 idna==3.4
     # via requests
 kombu==5.2.4
@@ -88,3 +90,6 @@ wcwidth==0.2.5
     # via prompt-toolkit
 wrapt==1.14.1
     # via deprecated
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
