@@ -60,7 +60,7 @@ COPY manage.py /opt/weather/manage.py
 COPY --from=build /opt/venv /opt/venv
 COPY project /opt/weather/project
 
-RUN ["./manage.py", "compilemessages"]
+RUN ["/opt/venv/bin/python", "./manage.py", "compilemessages"]
 
 USER root
 
