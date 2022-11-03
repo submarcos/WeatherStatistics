@@ -25,7 +25,7 @@ WORKDIR /opt/weather
 
 COPY --chown=django:django .docker/backend/entrypoint.sh /opt/entrypoint.sh
 
-ENTRYPOINT ["/opt/entrypoint.sh"]
+ENTRYPOINT ["sh", "/opt/entrypoint.sh"]
 EXPOSE 8000
 
 FROM base as build
