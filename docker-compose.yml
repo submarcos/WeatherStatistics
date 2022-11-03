@@ -1,0 +1,67 @@
+version: "3.7"
+
+x-images:
+  django: &django
+    build:
+      context: .
+      target: dev
+
+    environment:
+      - DJANGO_SETTINGS_MODULE=project.settings
+    env_file:
+      - db.env
+      - app.env
+    volumes:
+      - .:/opt/weather
+    networks:
+      - redis-net
+      - db-net
+      - default
+
+services:
+  redis:
+    image: redis:alpine
+    networks:
+      - redis-net
+
+  db:
+    image: postgis/postgis:15-3.3
+    env_file:
+      - db.env
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - db-net
+
+  web:
+    <<: [*django]
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    depends_on:
+      - db
+      - celery
+      - redis
+
+  celery:
+    <<: [*django]
+    command: celery -A project worker -l info
+    depends_on:
+      - db
+      - redis
+
+  beat:
+    <<: [ *django ]
+    command: celery -A project beat -l info
+    depends_on:
+      - celery
+
+volumes:
+  db:
+
+networks:
+  default:
+  redis-net:
+  db-net:

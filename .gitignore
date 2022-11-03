@@ -1,0 +1,7 @@
+/app.env
+/db.env
+/db.sqlite3
+__pycache__
+*.mo
+*.pyc
+.idea
