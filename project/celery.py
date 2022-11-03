@@ -2,6 +2,10 @@ import os
 
 from celery import Celery
 
+
+# set the default Django settings module for the 'celery' program.
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+
 app = Celery("project")
 
 BROKER_URL = f'redis://{os.getenv("REDIS_HOST", "redis")}:{os.getenv("REDIS_PORT", "6379")}/{os.getenv("REDIS_DB", "0")}'

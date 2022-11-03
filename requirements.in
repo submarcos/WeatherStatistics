@@ -1,6 +1,7 @@
 django
 requests
 psycopg2
+whitenoise
 gunicorn
 celery[redis]
 django-celery-results
