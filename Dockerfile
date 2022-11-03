@@ -60,6 +60,7 @@ COPY --chown=django:django manage.py /opt/weather/manage.py
 COPY --chown=django:django --from=build /opt/venv /opt/venv
 COPY --chown=django:django project /opt/weather/project
 COPY --chown=django:django Procfile /opt/weather/Procfile
+COPY --chown=django:django .docker/backend/release.sh /release.sh
 
 # RUN ["/opt/venv/bin/python", "./manage.py", "compilemessages"]
 
