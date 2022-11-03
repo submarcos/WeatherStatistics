@@ -36,6 +36,3 @@ class DailyData(models.Model):
     max_wind_speed = models.FloatField()
     avg_wind_speed = models.FloatField()
     total_rainfall = models.FloatField()
-
-
-

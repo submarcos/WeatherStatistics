@@ -115,5 +115,3 @@ def get_realtime():
         humidex=float(final_values['humidex']),
         uv_index=float(final_values['UV_index']),
     )
-
-
