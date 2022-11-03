@@ -23,9 +23,9 @@ RUN adduser django
 RUN mkdir -p /opt/weather && chown -R django:django /opt
 WORKDIR /opt/weather
 
-COPY --chown=django:django .docker/backend/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=django:django .docker/backend/entrypoint.sh /opt/entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
 EXPOSE 8000
 
 FROM base as build
