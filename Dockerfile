@@ -59,6 +59,8 @@ FROM base as prod
 COPY --chown=django:django manage.py /opt/weather/manage.py
 COPY --chown=django:django --from=build /opt/venv /opt/venv
 COPY --chown=django:django project /opt/weather/project
+COPY --chown=django:django app.json /opt/weather/app.json
+COPY --chown=django:django Procfile /opt/weather/Procfile
 
 # RUN ["/opt/venv/bin/python", "./manage.py", "compilemessages"]
 
@@ -71,4 +73,4 @@ RUN apt-get -y -qq update \
 
 USER django
 
-CMD /opt/venv/bin/gunicorn backend.wsgi:application 0.0.0.0:8000
+CMD /opt/venv/bin/gunicorn project.wsgi:application 0.0.0.0:8000
