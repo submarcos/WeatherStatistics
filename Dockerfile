@@ -20,7 +20,7 @@ RUN apt-get -y -qq update \
     && rm -rf /var/cache/apt/archives/*
 
 RUN adduser django
-RUN mkdir -p /opt/weather && chown django:django /opt
+RUN mkdir -p /opt/weather && chown -R django:django /opt
 WORKDIR /opt/weather
 
 COPY .docker/backend/entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -56,11 +56,11 @@ CMD /opt/venv/bin/python manage.py runserver 0.0.0.0:8000
 
 FROM base as prod
 
-COPY manage.py /opt/weather/manage.py
-COPY --from=build /opt/venv /opt/venv
-COPY project /opt/weather/project
+COPY --chown=django:django manage.py /opt/weather/manage.py
+COPY --chown=django:django --from=build /opt/venv /opt/venv
+COPY --chown=django:django project /opt/weather/project
 
-RUN ["/opt/venv/bin/python", "./manage.py", "compilemessages"]
+# RUN ["/opt/venv/bin/python", "./manage.py", "compilemessages"]
 
 USER root
 
