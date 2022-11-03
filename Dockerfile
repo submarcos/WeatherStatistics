@@ -12,6 +12,7 @@ RUN apt-get -y -qq update \
     python3 \
     libpq5 \
     postgresql-client \
+    gettext \
     tzdata \
     netcat \
     && apt-get clean \
@@ -35,7 +36,6 @@ RUN apt-get -y -qq update \
     python3-venv \
     build-essential \
     libpq-dev \
-    gettext \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/archives/*
