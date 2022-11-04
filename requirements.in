@@ -2,6 +2,7 @@ django
 djangorestframework
 django-crispy-forms
 crispy-bootstrap5
+django-filter
 requests
 psycopg2
 whitenoise

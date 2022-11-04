@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_celery_results",
     "django_celery_beat",
+    "django_filters",
     "rest_framework",
     "crispy_forms",
     "crispy_bootstrap5",
@@ -148,3 +149,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"
+
+REST_FRAMEWORK = {
+    "PAGE_SIZE": 50,
+}

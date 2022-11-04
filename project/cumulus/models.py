@@ -18,6 +18,9 @@ class DailyData(models.Model):
     total_rainfall = models.FloatField()
     avg_wind_direction = models.CharField(max_length=3)
 
+    class Meta:
+        ordering = ("-date",)
+
 
 class Data(models.Model):
     real_datetime = models.DateTimeField(db_index=True)

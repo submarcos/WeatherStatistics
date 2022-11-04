@@ -42,6 +42,7 @@ django==4.1.3
     #   -r requirements.in
     #   crispy-bootstrap5
     #   django-celery-beat
+    #   django-filter
     #   djangorestframework
 django-celery-beat==2.4.0
     # via -r requirements.in
@@ -51,6 +52,8 @@ django-crispy-forms==1.14.0
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
+django-filter==22.1
+    # via -r requirements.in
 django-timezone-field==5.0
     # via django-celery-beat
 djangorestframework==3.14.0
