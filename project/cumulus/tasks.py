@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.db.models import Avg, Count, Max, Min, Sum
-from django.db.models.functions import TruncDate, Round
+from django.db.models.functions import Round, TruncDate
 from django.views.generic.dates import timezone_today
 
 from project.cumulus.data import get_realtime
