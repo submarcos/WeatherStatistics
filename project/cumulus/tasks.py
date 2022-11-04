@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.db.models import Avg, Count, Max, Min, Sum
-from django.db.models.functions import TruncDate
+from django.db.models.functions import TruncDate, Round
 from django.views.generic.dates import timezone_today
 
 from project.cumulus.data import get_realtime
@@ -40,16 +40,16 @@ def compile_daily_data():
         compiled_data = day_data.aggregate(
             min_temp=Min("temperature"),
             max_temp=Max("temperature"),
-            avg_temp=Avg("temperature"),
+            avg_temp=Round(Avg("temperature"), 2),
             min_humidity=Min("humidity"),
             max_humidity=Max("humidity"),
-            avg_humidity=Avg("humidity"),
+            avg_humidity=Round(Avg("humidity"), 2),
             min_barometer=Min("barometer"),
             max_barometer=Max("barometer"),
-            avg_barometer=Avg("barometer"),
+            avg_barometer=Round(Avg("barometer"), 2),
             min_wind_speed=Min("wind_speed"),
             max_wind_speed=Max("wind_speed"),
-            avg_wind_speed=Avg("wind_speed"),
+            avg_wind_speed=Round(Avg("wind_speed"), 2),
             total_rainfall=Sum("rain_per_hour"),
         )
 
