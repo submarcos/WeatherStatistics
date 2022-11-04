@@ -1,6 +1,7 @@
 from celery import shared_task
 from django.db.models import Min, Max, Avg, Sum, Count
 from django.db.models.functions import TruncDate
+from django.views.generic.dates import timezone_today
 
 from project.cumulus.data import get_realtime
 from project.cumulus.models import Data, DailyData
@@ -15,7 +16,7 @@ def get_weather_data():
 @shared_task
 def compile_daily_data():
     # get day data not compiled
-    data = Data.objects.filter(daily_data__isnull=True).order_by("real_datetime")
+    data = Data.objects.filter(daily_data__isnull=True).exclude(real_datetime__day=timezone_today()).order_by("real_datetime")
     days = data.annotate(day=TruncDate("real_datetime")).values("day").distinct()
 
     for day in days:
@@ -47,3 +48,4 @@ def compile_daily_data():
             date=day["day"], avg_wind_direction=avg, **compiled_data
         )
         day_data.update(daily_data=daily_data_instance)
+    return True
