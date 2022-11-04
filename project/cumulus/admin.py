@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from project.cumulus.models import Data, DailyData
+from project.cumulus.models import DailyData, Data
 
 
 @admin.register(Data)

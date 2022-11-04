@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{%  load i18n static crispy_forms_tags %}
+
+{% block title %}
+    {% trans "Login to Weather" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <form class="form-horizontal" method="post">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        {% trans "Weather" %}
+                    </div>
+                    <div class="card-body">
+                        {% crispy form %}
+                    </div>
+                    <div class="card-footer">
+                        <input class="btn btn-primary" type="submit" value="{% trans "Submit" %}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

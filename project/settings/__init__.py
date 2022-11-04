@@ -13,7 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = PROJECT_DIR.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     "django_celery_results",
     "django_celery_beat",
     "rest_framework",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "project.accounts",
     "project.cumulus",
 ]
 
@@ -59,7 +63,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [PROJECT_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,3 +131,20 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f'redis://{os.getenv("REDIS_HOST", "redis")}:{os.getenv("REDIS_PORT", "6379")}',
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
