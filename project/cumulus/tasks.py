@@ -16,10 +16,11 @@ def get_weather_data():
 @shared_task
 def compile_daily_data():
     # get day data not compiled
-    data = Data.objects.filter(daily_data__isnull=True).exclude(real_datetime__day=timezone_today()).order_by("real_datetime")
-    days = data.annotate(day=TruncDate("real_datetime")).values("day").distinct()
+    data = Data.objects.filter(daily_data__isnull=True).exclude(real_datetime__date=timezone_today()).order_by("real_datetime")
+    days = data.annotate(day=TruncDate("real_datetime")).order_by("day").values("day").distinct("day")
 
     for day in days:
+        print(day)
         day_data = data.filter(real_datetime__date=day["day"])
         avg_wind_direction = (
             day_data.order_by("wind_direction")
@@ -27,7 +28,7 @@ def compile_daily_data():
             .alias(count=Count("wind_direction"))
             .order_by("-count")
         )
-        avg = str(avg_wind_direction[0]["wind_direction"])
+        avg = str(avg_wind_direction.first()["wind_direction"])
         compiled_data = day_data.aggregate(
             min_temp=Min("temperature"),
             max_temp=Max("temperature"),
