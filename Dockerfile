@@ -45,6 +45,7 @@ USER django
 RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir --upgrade pip wheel
 
 COPY requirements.txt /opt/weather/requirements.txt
+RUN /opt/venv/bin/pip install --no-cache-dir --upgrade pip setuptools wheel
 RUN /opt/venv/bin/pip install --no-cache-dir --upgrade -r /opt/weather/requirements.txt
 
 FROM build as dev
