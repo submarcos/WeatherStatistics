@@ -6,26 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Data',
+            name="Data",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('real_datetime', models.DateTimeField(db_index=True)),
-                ('temperature', models.FloatField()),
-                ('humidity', models.FloatField()),
-                ('wind_speed', models.FloatField()),
-                ('wind_bearing_degrees', models.FloatField()),
-                ('rain_per_hour', models.FloatField()),
-                ('barometer', models.FloatField()),
-                ('wind_direction', models.CharField(max_length=3)),
-                ('wind_speed_beaufort', models.PositiveIntegerField()),
-                ('heat_index', models.FloatField()),
-                ('humidex', models.FloatField()),
-                ('uv_index', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("real_datetime", models.DateTimeField(db_index=True)),
+                ("temperature", models.FloatField()),
+                ("humidity", models.FloatField()),
+                ("wind_speed", models.FloatField()),
+                ("wind_bearing_degrees", models.FloatField()),
+                ("rain_per_hour", models.FloatField()),
+                ("barometer", models.FloatField()),
+                ("wind_direction", models.CharField(max_length=3)),
+                ("wind_speed_beaufort", models.PositiveIntegerField()),
+                ("heat_index", models.FloatField()),
+                ("humidex", models.FloatField()),
+                ("uv_index", models.FloatField()),
             ],
         ),
     ]

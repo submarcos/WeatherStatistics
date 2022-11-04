@@ -65,7 +65,7 @@ MAPPING = {
     55: "sunshine_hours",
     56: "current_solar_max_radiation",
     57: "is_it_sunny",
-    58: "feels_like"
+    58: "feels_like",
 }
 
 REALTIME_URL = "http://weather.oadf.fr/realtime.txt"
@@ -73,7 +73,7 @@ TIMEZONE = "Europe/Paris"
 
 
 def remap(data):
-    """ map data as dict """
+    """map data as dict"""
     final_dict = {}
     for i in range(len(data)):
         final_dict[MAPPING[i]] = data[i]
@@ -81,37 +81,42 @@ def remap(data):
 
 
 def _get_data():
-    """ Get data from cumulus realtime.txt """
+    """Get data from cumulus realtime.txt"""
     response = requests.get(REALTIME_URL)
     data = response.content.decode().split(" ")
     return data
 
 
 def get_realtime():
-    """ Get latest data from cumulus """
+    """Get latest data from cumulus"""
     data = _get_data()
     final_values = remap(data)
     for key, value in final_values.items():
         print(f"{key}: {value}")
-    real_datetime = datetime.datetime.strptime(f"{final_values['date']} {final_values['time']}",
-                                               "%d/%m/%y %H:%M:%S")
+    real_datetime = datetime.datetime.strptime(
+        f"{final_values['date']} {final_values['time']}", "%d/%m/%y %H:%M:%S"
+    )
     tz_real_datetime = datetime.datetime(
-        year=real_datetime.year, month=real_datetime.month, day=real_datetime.day,
-        hour=real_datetime.hour, minute=real_datetime.minute, second=real_datetime.second,
-        tzinfo=ZoneInfo(TIMEZONE)
+        year=real_datetime.year,
+        month=real_datetime.month,
+        day=real_datetime.day,
+        hour=real_datetime.hour,
+        minute=real_datetime.minute,
+        second=real_datetime.second,
+        tzinfo=ZoneInfo(TIMEZONE),
     )
 
     Data.objects.create(
         real_datetime=tz_real_datetime,
-        temperature=float(final_values['outside_temperature']),
-        humidity=float(final_values['relative_humidity']),
-        wind_speed=float(final_values['latest_wind_speed_reading']),
-        wind_bearing_degrees=float(final_values['wind_bearing_degrees']),
-        rain_per_hour=float(final_values['current_rain_rate_per_hour']),
-        barometer=float(final_values['barometer_sea_level_pressure']),
-        wind_direction=final_values['wind_direction_compass'],
-        wind_speed_beaufort=int(final_values['wind_speed_beaufort']),
-        heat_index=float(final_values['heat_index']),
-        humidex=float(final_values['humidex']),
-        uv_index=float(final_values['UV_index']),
+        temperature=float(final_values["outside_temperature"]),
+        humidity=float(final_values["relative_humidity"]),
+        wind_speed=float(final_values["latest_wind_speed_reading"]),
+        wind_bearing_degrees=float(final_values["wind_bearing_degrees"]),
+        rain_per_hour=float(final_values["current_rain_rate_per_hour"]),
+        barometer=float(final_values["barometer_sea_level_pressure"]),
+        wind_direction=final_values["wind_direction_compass"],
+        wind_speed_beaufort=int(final_values["wind_speed_beaufort"]),
+        heat_index=float(final_values["heat_index"]),
+        humidex=float(final_values["humidex"]),
+        uv_index=float(final_values["UV_index"]),
     )

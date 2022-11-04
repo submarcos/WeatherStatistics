@@ -12,14 +12,14 @@ BROKER_URL = f'redis://{os.getenv("REDIS_HOST", "redis")}:{os.getenv("REDIS_PORT
 
 app.conf.update(
     enable_utc=True,
-    accept_content=['json'],
+    accept_content=["json"],
     broker_url=BROKER_URL,
-    task_serializer='json',
-    result_serializer='json',
+    task_serializer="json",
+    result_serializer="json",
     result_expires=5,
-    result_backend='django-db',
-    cache_backend='django-cache',
-    beat_scheduler='django_celery_beat.schedulers:DatabaseScheduler',
+    result_backend="django-db",
+    cache_backend="django-cache",
+    beat_scheduler="django_celery_beat.schedulers:DatabaseScheduler",
     result_extended=True,
     task_track_started=True,
 )

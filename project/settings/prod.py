@@ -1,7 +1,9 @@
-from . import *
+import os
+
+from . import *  # NOQA
 
 ALLOWED_HOSTS = [
-    os.getenv('DOMAIN'),
+    os.getenv("DOMAIN"),
 ]
 DEBUG = False
 SESSION_COOKIE_SECURE = True

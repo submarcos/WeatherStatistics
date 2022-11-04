@@ -5,32 +5,40 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('cumulus', '0001_initial'),
+        ("cumulus", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='DailyData',
+            name="DailyData",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField(db_index=True, unique=True)),
-                ('min_temp', models.FloatField()),
-                ('max_temp', models.FloatField()),
-                ('avg_temp', models.FloatField()),
-                ('min_humidity', models.FloatField()),
-                ('max_humidity', models.FloatField()),
-                ('avg_humidity', models.FloatField()),
-                ('min_barometer', models.FloatField()),
-                ('max_barometer', models.FloatField()),
-                ('avg_barometer', models.FloatField()),
-                ('min_wind_speed', models.FloatField()),
-                ('max_wind_speed', models.FloatField()),
-                ('avg_wind_speed', models.FloatField()),
-                ('total_rainfall', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField(db_index=True, unique=True)),
+                ("min_temp", models.FloatField()),
+                ("max_temp", models.FloatField()),
+                ("avg_temp", models.FloatField()),
+                ("min_humidity", models.FloatField()),
+                ("max_humidity", models.FloatField()),
+                ("avg_humidity", models.FloatField()),
+                ("min_barometer", models.FloatField()),
+                ("max_barometer", models.FloatField()),
+                ("avg_barometer", models.FloatField()),
+                ("min_wind_speed", models.FloatField()),
+                ("max_wind_speed", models.FloatField()),
+                ("avg_wind_speed", models.FloatField()),
+                ("total_rainfall", models.FloatField()),
             ],
         ),
         migrations.AlterModelOptions(
-            name='data',
-            options={'ordering': ('-real_datetime',)},
+            name="data",
+            options={"ordering": ("-real_datetime",)},
         ),
     ]
